@@ -1,22 +1,31 @@
-class Solution:
-    def evalRPN(self, tokens: List[str]) -> int:
+class MinStack:
+    
+    def __init__(self):
         stack = []
-        expressions = "+-*/"
-        for i in tokens:
-            if (i not in expressions ):
-                stack.append(int(i))
-            else:
-                n = stack.pop()
-                m = stack.pop()
-                if i=="+":
-                    stack.append(m+n)
-                elif i=="-":
-                    stack.append(m-n)
-                elif i=="*":
-                    stack.append(m*n)
-                elif i=="/":
-                    stack.append(int(m/n))
-                    
+        self.stack = stack
+    
+
+    def push(self, val: int) -> None:
+        self.stack.append(val)
+      
+    def pop(self) -> None:
+        if len(self.stack)!= 0:
+            self.stack.pop()
+        
+
+    def top(self) -> int:
+        if len(self.stack)!= 0:
+            return self.stack[-1]
+        
+
+    def getMin(self) -> int:
+        if len(self.stack)!= 0:
+            ans = self.stack[0]
+            for i in self.stack:
+                if ans> i:
+                    ans = i
                 
-        return stack[0]
+           
+            return ans
+        
             
