@@ -1,6 +1,5 @@
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        
         l,r= 0,0
         ans = float('inf')
         summ = 0
@@ -17,6 +16,8 @@ class Solution:
             return 0
         else:
             return ans
+        
+       
     
        
         
