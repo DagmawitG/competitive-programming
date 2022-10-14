@@ -3,18 +3,17 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        freq = [0]*3
-        for i in range(len(nums)):
-            freq[nums[i]] += 1
-        index = 0
-        for j in range(len(freq)):
-            count = freq[j]
-            while(count):
-                nums[index] = j
+        low,index,high = 0,0,len(nums)-1
+        while index <= high:
+            if nums[index] ==0:
+                nums[low],nums[index] =nums[index],nums[low]
+                low += 1
                 index += 1
-                count -= 1
-        return nums
+            elif nums[index] == 2:
+                nums[high],nums[index] = nums[index],nums[high]
+                high -= 1
                 
-            
-        
+            else:
+                index += 1
+        return nums
         
