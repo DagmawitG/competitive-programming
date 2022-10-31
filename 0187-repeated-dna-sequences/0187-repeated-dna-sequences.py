@@ -4,13 +4,8 @@ class Solution:
         left = 0
         visited = set()
         for i in range(len(s)-9):
-            right = i 
-            count = 0
-            temp = ''
-            while count < 10 and right < len(s):
-                temp += s[right]
-                right += 1
-                count += 1
+            temp = s[i:i+10]
+           
             if temp not in visited:
                 visited.add(temp)
             else:
