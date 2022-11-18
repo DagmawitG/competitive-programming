@@ -10,17 +10,30 @@ class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         cloneMap = {}
         if not node:
-            return 
+            return  
+        visited = set()
         
-        def dfs(node):
-            if node in cloneMap:
-                return cloneMap[node]
-            clone = Node(node.val)
-            cloneMap[node] = clone
-            
-            for neighbor in node.neighbors:
-                clone.neighbors.append(dfs(neighbor))
-                
-            return clone
-        return dfs(node)
+        def bfs(node):
+            queue = deque([(node)])
+            while queue:
+                cur = queue.popleft()
+                if cur in visited:
+                    continue
+                visited.add(cur)
+                if cur not in cloneMap :
+                    cloneMap[cur] = Node(cur.val)
+                    
+                for neighbor in cur.neighbors:
+                    if neighbor not in cloneMap:
+                        cloneMap[neighbor] = Node(neighbor.val)
+                    cloneMap[cur].neighbors.append(cloneMap[neighbor])
+                    queue.append(neighbor)
+                    
+            return cloneMap[node]
+           
+        return bfs(node)            
+        
+                    
+        
+     
         
