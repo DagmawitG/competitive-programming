@@ -13,10 +13,10 @@ class Solution:
             return  
         visited = set()
         
-        def bfs(node):
-            queue = deque([(node)])
-            while queue:
-                cur = queue.popleft()
+        def dfs(node):
+            stack =deque([node])
+            while stack:
+                cur = stack.pop()
                 if cur in visited:
                     continue
                 visited.add(cur)
@@ -27,11 +27,11 @@ class Solution:
                     if neighbor not in cloneMap:
                         cloneMap[neighbor] = Node(neighbor.val)
                     cloneMap[cur].neighbors.append(cloneMap[neighbor])
-                    queue.append(neighbor)
+                    stack.append(neighbor)
                     
             return cloneMap[node]
            
-        return bfs(node)            
+        return dfs(node)            
         
                     
         
