@@ -1,49 +1,48 @@
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
-        row = len(heights)
-        col = len(heights[0])
-        direction = [(0,1),(1,0),(-1,0),(0,-1)]
-        result = []
-        
         pacific = set()
         atlantic = set()
+        self.rows= len(heights)
+        self.cols = len(heights[0])
+        '''
+        pacific - row - (0 - rows - 1) and col = 0
+        atlantic - row - (rows -1) and col = (0,cols - 1)
+        '''
         
-       
-        def inbound(r,c):
-            return 0 <= r < row and 0 <= c < col
-        
-        def bfs(r,c,visited):
-            queue = deque([(r,c)])
-            visited.add((r,c))
-            while queue:
-                r,c = queue.popleft()
-                for x,y in direction:
-                    nr = r+x 
-                    nc = c + y
-                    if inbound(nr,nc) and heights[r][c] <= heights[nr][nc] and (nr,nc) not in visited:
-                        queue.append((nr,nc))
-                        visited.add((nr,nc))
-                        
-                        
-        for r in range(row):     
-            bfs(r,0,pacific)
-            bfs(r,col-1,atlantic)
-        for c in range(col):
-            bfs(0,c,pacific)
-            bfs(row-1,c,atlantic)
+        for r in range(self.rows):
+            self.bfs(r,0,heights,pacific)
+            self.bfs(r,self.cols-1,heights,atlantic)
+            
+        for c in range(self.cols):
+            self.bfs(0,c,heights,pacific)
+            self.bfs(self.rows-1,c,heights,atlantic)
             
         return pacific & atlantic
+            
+        
+    def inbound(self,row,col):
+        return 0 <= row < self.rows and 0 <= col < self.cols
+        
+        
+    def bfs(self,r,c,heights,visited):
+        queue = deque([(r,c)])
+        visited.add((r,c))
+        direction = [(0,1),(1,0),(-1,0),(0,-1)]
+        
+        while queue:
+            row,col = queue.popleft()
+            for i,j in direction:
+                new_row = row + i
+                new_col = col + j
+                if self.inbound(new_row,new_col) and (new_row,new_col) not in visited and heights[row][col] <= heights[new_row][new_col]:
+                    queue.append((new_row,new_col))
+                    visited.add((new_row,new_col))
                     
+                
             
-                    
-            
-            
-            
-            
-       
+        
+         
         
         
         
-        
-        
-       
+         
