@@ -3,14 +3,14 @@ class Solution:
         
         start = 0
         target = len(graph)-1
-        queue = deque([(start,[start])])
+        stack = [(start,[start])]
         result = []
-        while queue:
-            current, path = queue.popleft()
+        while stack:
+            current, path = stack.pop()
             if current == target:
                 result.append(path)     
             for node in graph[current]:
-                queue.append((node,path + [node]))
+                stack.append((node,path + [node]))
                 
         return result
                 
