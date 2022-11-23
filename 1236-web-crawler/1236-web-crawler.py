@@ -13,10 +13,11 @@ class Solution:
     def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
         
         domainName = startUrl.split("http://")[1].split('/')[0]
-        visited = {startUrl}
+        visited = set()
         answer = [startUrl]
         def bfs(url):
             queue = deque([(url)]) 
+            visited.add(url)
             while queue:
                 
                 url = queue.popleft()
