@@ -3,16 +3,14 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        
         left = 0
         right = 0
         while left <= right and right < len(nums):
-            if nums[right] == 0:
-                right += 1
-            else:
-                if nums[left] == 0:
-                    nums[left] , nums[right] = nums[right],nums[left]
+            if nums[right] != 0:
+                nums[left], nums[right] = nums[right], nums[left]
                 left += 1
-                right += 1
+            right += 1
         return nums
         
        
