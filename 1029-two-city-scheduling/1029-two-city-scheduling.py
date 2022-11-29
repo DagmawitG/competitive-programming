@@ -4,10 +4,11 @@ class Solution:
         n = len(costs)//2
         costB = 0
         costA = 0
-        for i in range(n):
-            costB += costs[i][1]
-        for i in range(n,len(costs)):
-            costA += costs[i][0]
+        for i in range(len(costs)):
+            if i < n:
+                costB += costs[i][1]
+            else:
+                costA += costs[i][0]
             
         return costA + costB
         
